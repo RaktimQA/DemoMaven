@@ -1,61 +1,43 @@
 package Demo;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
+import org.testng.annotations.Test; 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class Maven{
+
+public class Maven {
 
 	static WebDriver driver = null;
-	Properties prop = null;
+	@Test
 
-	public static void main(String[] args) throws InterruptedException, IOException {
-		File file =new File("/root/Documents/jee-oxygen/Worspace2/Java_Tutorials/DemoMaven/demomaven.properties");
-		FileInputStream fileinput = null;
+	@BeforeTest
+	public void setUpTest() {
 
-		try{
-			fileinput = new FileInputStream(file);
-		}
-		catch
-		(FileNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-		Properties prop = new Properties();
-		{
-			prop.load(fileinput);
-		}
-
-	System.setProperty("WebDriverManager.chromedriver", null);
-	driver = new ChromeDriver();
+		//set driver path
+		WebDriverManager.firefoxdriver().setup();
+		driver = new FirefoxDriver();
 	
 	}
 
-	@BeforeTest
-	public void setUp() {
-
-
-		WebDriverManager.chromedriver();
-		driver = new ChromeDriver();
-
-
-	}
-
 	@Test
-	public void googleSearch() {
+	public static void goaptiveAdminLogin() throws InterruptedException {
 
 
-		driver.get(prop.getProperty("URL"));
+		//open browser & open url
+		driver.get("https://google.com");
+		}
+
+	@AfterTest
+	public void tearDownTest() {
+
+		//close browser
+		driver.close();
+		System.out.println("Completed");
 
 	}
-
 }

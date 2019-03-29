@@ -5,6 +5,7 @@
     <classes>
       <class name="Demo.Maven">
         <methods>
+          <include name="tearDown"/>
           <include name="setUp"/>
           <include name="googleSearch"/>
         </methods>
